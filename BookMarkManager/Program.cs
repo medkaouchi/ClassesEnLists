@@ -10,8 +10,8 @@ namespace BookMarkManager
     {
         static void Main(string[] args)
         {
-            BookMark[] bookmarks = new BookMark[5];
-            for (int i = 0; i < bookmarks.Length; i++)
+            BookMark[] bookmarks = new BookMark[50];
+            for (int i = 0; i < 5; i++)
             {
                 Console.Write("Naam: ");
                 string naam = Console.ReadLine();
@@ -20,7 +20,7 @@ namespace BookMarkManager
             }
             do
             {
-                switch (SelectMenu("Bookmarks lijst", "Bookmark aanpassen", "Bookmark verwijderen"))
+                switch (SelectMenu("Bookmarks lijst", "Bookmark aanpassen", "Bookmark verwijderen","Bookmark invoeren"))
                 {
                     case 1:
                         string[] books = new string[bookmarks.Length]; int teller = 0;
@@ -106,6 +106,27 @@ namespace BookMarkManager
                                 for (int i = selectd; i < tell; i++)
                                     bookmarks[i - 1] = bookmarks[i];
                                 bookmarks[tell-1] = null;
+                            }
+                        }
+                        break;
+                    case 4:
+                        if (bookmarks[bookmarks.Length - 1] != null)
+                        { 
+                            Console.WriteLine("Je list is vol!");
+                            Console.ReadLine();
+                        }
+                        else
+                        {
+                            Console.Write("Naam: ");
+                            string nm = Console.ReadLine();
+                            Console.Write("Url: ");
+                            for (int i = 0; i < bookmarks.Length; i++)
+                            {
+                                if (bookmarks[i] == null)
+                                {
+                                    bookmarks[i] = new BookMark(nm, Console.ReadLine());
+                                    break;
+                                }
                             }
                         }
                         break;
